@@ -1,8 +1,10 @@
 import React from 'react'
+import NavBar from '../components/Navbar'
 
 const Signin = () => {
   return (
     <>
+    <NavBar onLoginClick={() => setShowLogin(true)}/>
       <div className='overflow-hidden h-screen w-full flex justify-between'>
         <div className="w-1/2 flex flex-col justify-start items-center px-10">
           <h1 className='text-4xl font-bold text-black leading-tight mt-5 mb-6'>Create Your Account</h1>
