@@ -17,7 +17,7 @@ exports.getHackathonsByCategory = async (req, res) => {
     const { category } = req.params;
     
     let query = {};
-    if (category !== 'all') {
+    if (category !== 'both' && category !== 'all') {
       query = { category };
     }
     
@@ -30,10 +30,24 @@ exports.getHackathonsByCategory = async (req, res) => {
 
 // Get top hackathons (by registration count)
 exports.getTopHackathons = async (req, res) => {
+  // try {
+  //   const hackathons = await Hackathon.find()
+  //                                     .sort({ registrations: -1 })
+  //                                     .limit(6);
+  //   res.json(hackathons);
+  // } catch (error) {
+  //   res.status(500).json({ message: error.message });
+  // }
+
   try {
-    const hackathons = await Hackathon.find()
-                                      .sort({ registrations: -1 })
-                                      .limit(6);
+    const { category } = req.params;
+    
+    let query = {};
+    if (category !== 'both') {
+      query = { category };
+    }
+    
+    const hackathons = await Hackathon.find(query);
     res.json(hackathons);
   } catch (error) {
     res.status(500).json({ message: error.message });
