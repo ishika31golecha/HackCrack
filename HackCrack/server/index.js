@@ -38,10 +38,24 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://hack-crack.vercel.app'
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'http://localhost:5173', 'https://hack-crack.vercel.app/'],
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS error: Not allowed origin ${origin}`));
+    }
+  },
   credentials: true
 }));
+
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hackcrack_db')
