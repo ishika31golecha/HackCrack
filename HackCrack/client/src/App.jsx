@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Homepage from './pages/Homepage';
 import Signin from './pages/Signin';
-import Hackathons from './pages/hackathons';
+import Hackathons from './pages/Hackathons';
 import Aboutus from './pages/Aboutus';
 import Contactus from './pages/Contactus';
 import Profile from './pages/Profile';
